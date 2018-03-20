@@ -1,8 +1,14 @@
 package com.example.twitsplit;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -13,8 +19,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.twitsplit.home.HomeFragment;
+import com.example.twitsplit.login.LoginActivity;
+
+import java.util.HashMap;
+
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private Fragment mFragment = new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +34,6 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,6 +43,7 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        initDefaultView(mFragment);
     }
 
     @Override
@@ -57,46 +61,21 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_home:
+                break;
+            case R.id.nav_profile:
+                break;
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_logout:
+                doLogout();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,20 +83,43 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    private void findIndex(String[] text) {
-        String result = "";
+    /**
+     * init first fragment to Activity
+     *
+     * @param frg fragment to return
+     */
+    private void initDefaultView(final Fragment frg) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                frg).commitAllowingStateLoss();
+    }
 
-        for (int pos = 0; pos <= text.length; pos ++) {
-            if (pos < text.length) {
-                if (result.length() + text[pos].length() <= 50) {
-                    result = result.concat(" ").concat(text[pos]);
-                } else {
-                    Log.d("TAG", "i: " + pos + "       text: " + result);
-                    result = text[pos];
-                }
-            } else {
-                Log.d("TAG", "i: " + pos + "       text: " + result);
+    private void doLogout() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+        adb.setTitle("Logout");
+        adb.setCancelable(false);
+        adb.setMessage(getString(R.string.confirm_logout));
+
+        adb.setNegativeButton("Cancel", null);
+        adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                //Reset data
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences
+                        (MainActivity.this);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.remove(Constant.IS_LOGIN);
+                editor.apply();
+
+                gotoLoginScreen();
             }
-        }
+        });
+        adb.show();
+    }
+
+    private void gotoLoginScreen() {
+        final Intent intent = new Intent(this, LoginActivity.class);
+        // clear history to prevent go back to this by back button.
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
