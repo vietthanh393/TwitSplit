@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 
 import com.example.twitsplit.login.LoginActivity;
+import com.example.twitsplit.utils.Constant;
 
 public class SplashActivity extends Activity {
 

@@ -1,6 +1,6 @@
 package com.example.twitsplit.login;
 
-import com.example.twitsplit.Constant;
+import com.example.twitsplit.utils.Constant;
 
 public class LoginInteractor {
     public void login(final String username, final String password, final OnLoginEventListener listener) {

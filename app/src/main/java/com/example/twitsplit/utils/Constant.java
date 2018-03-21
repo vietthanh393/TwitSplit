@@ -1,4 +1,4 @@
-package com.example.twitsplit;
+package com.example.twitsplit.utils;
 
 public class Constant {
     public final static String IS_LOGIN = "IS_LOGIN";

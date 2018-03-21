@@ -1,0 +1,58 @@
+{
+  "friends": [
+    {
+      "id": "101",
+      "name": "Jenny",
+      "email": "jenny@gmail.com",
+      "imgSrc": "https://i.imgur.com/Xp8W4uSg.jpg"
+    },
+    {
+      "id": "102",
+      "name": "Thomas",
+      "email": "thomas.ant@gmail.com",
+      "imgSrc": "https://i.imgur.com/DwqgCg1.jpg"
+    },
+    {
+      "id": "103",
+      "name": "Caption",
+      "email": "caption@gmail.com",
+      "imgSrc": "https://i.imgur.com/3q0rXBQ.jpg"
+    },
+    {
+      "id": "104",
+      "name": "Thor",
+      "email": "thor@gmail.com",
+      "imgSrc": "https://i.imgur.com/0cpSiJA.jpg"
+    },
+    {
+      "id": "105",
+      "name": "Natasha",
+      "email": "natasha@gmail.com",
+      "imgSrc": "https://i.imgur.com/CtMVK31.jpg"
+    },
+    {
+      "id": "106",
+      "name": "Kingsman",
+      "email": "kingsman@hotmail.com",
+      "imgSrc": "https://i.imgur.com/cpvMPok.jpg"
+    },
+    {
+      "id": "107",
+      "name": "Beckham",
+      "email": "beckham@hotmail.com",
+      "imgSrc": "https://i.imgur.com/R7CB30R.jpg"
+    },
+    {
+      "id": "108",
+      "name": "Totti",
+      "email": "totti.frank@gmail.com",
+      "imgSrc": "https://i.imgur.com/VqWsETE.jpg"
+    },
+    {
+      "id": "109",
+      "name": "Laurie",
+      "email": "laurie@gmail.com",
+      "imgSrc": "https://i.imgur.com/KycTHYN.jpg"
+    }
+  ]
+}

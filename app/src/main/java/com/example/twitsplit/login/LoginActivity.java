@@ -12,10 +12,10 @@ import android.view.Window;
 import android.widget.EditText;
 
 import com.example.twitsplit.BaseActivity;
-import com.example.twitsplit.Constant;
+import com.example.twitsplit.utils.Constant;
 import com.example.twitsplit.MainActivity;
 import com.example.twitsplit.R;
-import com.example.twitsplit.Utils;
+import com.example.twitsplit.utils.Utils;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, OnLoginEventListener {
     private static final String TAG = LoginActivity.class.getSimpleName();
