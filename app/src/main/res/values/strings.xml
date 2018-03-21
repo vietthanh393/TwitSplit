@@ -11,4 +11,7 @@
     <string name="register_register_btn_text">Register</string>
     <string name="dialog_login_progress_text">Logging progress&#x2026;</string>
     <string name="confirm_logout">Do you want to log out?</string>
+    <string name="enter_message">Enter message</string>
+    <string name="error_message">The message should not contain a span of non-whitespace character longer than 50 characters.</string>
+    <string name="part_indicator">%d/%d </string>
 </resources>

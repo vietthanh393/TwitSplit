@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -58,10 +59,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * Show a message to User
+     *
      * @param message description
      */
     public void onShowToast(String message) {
-        if(mSnackBarDock != null) {
+        if (mSnackBarDock != null) {
             Snackbar.make(mSnackBarDock, message, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
@@ -69,11 +71,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * Show dialog to wait for result
+     *
      * @param title title of dialog
-     * @param msg message to show
+     * @param msg   message to show
      */
     public void showDialog(final String title, final String msg) {
-        if(mDialog == null) {
+        if (mDialog == null) {
             mDialog = new ProgressDialog(this);
             mDialog.setCanceledOnTouchOutside(false);
         }
@@ -86,9 +89,24 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Dismiss dialog if showing
      */
     public void dismissDialog() {
-        if(mDialog != null && mDialog.isShowing()) {
+        if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
             mDialog = null;
+        }
+    }
+
+    /**
+     * function to init actionBar apply to child Activity.
+     *
+     * @param title  the title to show.
+     * @param isBack init the back button;
+     */
+    public void initActionBar(String title, boolean isBack) {
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+            actionBar.show();
+            actionBar.setDisplayHomeAsUpEnabled(isBack);
         }
     }
 }

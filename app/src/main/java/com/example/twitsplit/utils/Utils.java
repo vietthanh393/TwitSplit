@@ -1,8 +1,11 @@
 package com.example.twitsplit.utils;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -70,9 +73,10 @@ public class Utils {
 
     /**
      * get json from string by key
+     *
      * @param jsonString the json body from server or file
-     * @param key the key to filter
-     * @return the object that convert from Json
+     * @param key        the key to filter
+     * @return
      */
     public static Object getJsonStringByKey(final String jsonString, final String key) {
         try {
@@ -104,12 +108,44 @@ public class Utils {
     public static <T> T parseJson(final Class<T> tClass, final String json) {
         final GsonBuilder gsonBuilder = new GsonBuilder();
         final Gson gson = gsonBuilder.create();
-        final Type token = new TypeToken<ArrayList<Friends>>(){}.getType();
+        final Type token = new TypeToken<ArrayList<Friends>>() {
+        }.getType();
         try {
             return gson.fromJson(json, token);
         } catch (Exception ex) {
             Log.e("Utils", "Could not parseJson: ", ex);
             return null;
+        }
+    }
+
+    /**
+     * function to remove newline character in string
+     *
+     * @param string the String need to check
+     * @return the final result
+     */
+    public static String removeNewLineCharacter(final String string) {
+        if (string.endsWith("\n")) {
+            return string.substring(0, string.length() - 1);
+        } else {
+            return string;
+        }
+    }
+
+    /**
+     * function to get screen width
+     *
+     * @param context
+     * @return the width resolution of screen
+     */
+    public static int getScreenWidth(final Context context) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (windowManager != null) {
+            windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+            return displayMetrics.widthPixels;
+        } else {
+            return 0;
         }
     }
 }

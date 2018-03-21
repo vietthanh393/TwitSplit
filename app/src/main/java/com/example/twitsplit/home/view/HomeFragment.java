@@ -1,6 +1,7 @@
 package com.example.twitsplit.home.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.twitsplit.R;
+import com.example.twitsplit.chat.ChatActivity;
 import com.example.twitsplit.home.adapter.FriendsAdapter;
 import com.example.twitsplit.home.listener.OnItemClickListener;
 import com.example.twitsplit.home.model.Friends;
@@ -102,5 +104,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnIt
     @Override
     public void onItemClick(int position) {
         Log.d(TAG, "onItemClick " + position);
+        Intent intent = new Intent(getContext(), ChatActivity.class);
+        intent.putExtra(ChatActivity.USER_NAME, mFriendsList.get(position).getName());
+        startActivity(intent);
     }
 }
